@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Serve up static assets
-app.use(express.static("client/build"));
+app.use(express.static("client/public"));
 // Add routes, both API and view
 app.use(routes);
 
@@ -22,7 +22,17 @@ mongoose.connect(
     useMongoClient: true
   }
 );
+// MongoDB Configuration configuration (Change this URL to your own DB)
+// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds143738.mlab.com:43738/heroku_968j4pks');
+// var db = mongoose.connection;
 
+// db.on('error', function (err) {
+//   console.log('Mongoose Error: ', err);
+// });
+
+// db.once('open', function () {
+//   console.log('Mongoose connection successful.');
+// });
 // Start the API server
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
