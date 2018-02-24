@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Footer from "./common/Footer";
-import Search from "./common/Search";
-import Results from "./common/Results";
-import Saved from "./common/Saved";
-import API from "../utils/API";
+import Footer from "./Footer";
+import Search from "./Search";
+import Results from "./Results";
+import Saved from "./Saved";
+import API from "../../../utils/API";
 
 import { Route, Link } from "react-router-dom";
 
-class Main extends Component {
+class Articles extends Component {
 	constructor(props){
 		super(props);
 	
@@ -30,7 +30,7 @@ class Main extends Component {
 	}
 
 	saveArticle = (index) => {
-		event.preventDefault();
+		
 	    API.saveArticle(this.state.searchResults[index]).then((response) => {
 	      this.getArticles();
 	    });
@@ -131,4 +131,4 @@ class Main extends Component {
 }
 
 
-export default Main;
+export default Articles;

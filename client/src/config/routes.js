@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 
-import Main from "../components/Main";
+import Articles from "../components/common/Articles";
 
 const routes = (
   <BrowserRouter>
-    <Route path="/" component={Main}>
+    <Route path="/" component={Articles}>
     </Route>
   </BrowserRouter>
 );
