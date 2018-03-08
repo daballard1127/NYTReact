@@ -14,7 +14,7 @@ class Articles extends Component {
 		//init states
 		this.state = {
 		  searchTerm: "",
-	      limit: 5,
+	      limit: "5",
 	      startYear: "",
 	      endYear: "",
 	      searchResults: [],
@@ -22,7 +22,7 @@ class Articles extends Component {
 		};
 
 		this.clearSearch = this.clearSearch.bind(this);
-		this.searchArticles = this.searchArticles.bind(this);
+		this.searchNYT = this.searchNYT.bind(this);
 	}
 
 	componentDidMount = () => {
@@ -45,7 +45,7 @@ class Articles extends Component {
     }
 
     getArticles = () => {
-	    API.getSavedArticles().then((response) => {
+	    API.getArticles().then((response) => {
 	      this.setState({ savedArticles: response.data });
 	    });
 	}
@@ -74,7 +74,7 @@ class Articles extends Component {
 	  clearSearch() {
 	    var newState = {
 	      searchTerm: "",
-	      limit: 5,
+	      limit: "5",
 	      startYear: "",
 	      endYear: "",
 	      searchResults: []
@@ -82,12 +82,12 @@ class Articles extends Component {
 	    this.setState(newState);
 	  }
 
-	  searchArticles(searchTerm, limit, startYear, endYear) {
+	  searchNYT = (searchTerm, startYear, endYear)  => {
 
-	    API.getNYTArticles(searchTerm, startYear, endYear).then((response) => {
+	    API.searchNYT(searchTerm, startYear, endYear).then((response) => {
 
                 var returns = [];
-                for (var i = 0; i < limit && i < response.data.response.docs.length; ++i)
+                for (var i = 0; i < response.data.response.docs.length; ++i)
                     returns.push(response.data.response.docs[i]);
 
                 this.setState({searchResults : returns});
@@ -96,7 +96,7 @@ class Articles extends Component {
 
 	  handleFormSubmit = event => {
 	  	event.preventDefault();
-	  	this.searchArticles(this.state.searchTerm, this.state.limit, this.state.startYear, this.state.endYear);
+	  	this.searchNYT(this.state.searchTerm, this.state.startYear, this.state.endYear);
 	  }
 
 	render() {

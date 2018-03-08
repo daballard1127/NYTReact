@@ -5,7 +5,7 @@ const Footer = () => (
     <hr />
     <p className="pull-right">
       
-      Made by Novia with lots and lots of <i className="fa fa-heart" aria-hidden="true" />
+      Denise Ballard 
     </p>
   </footer>
 );

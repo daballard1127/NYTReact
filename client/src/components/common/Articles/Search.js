@@ -29,17 +29,17 @@ const Search = props =>
               </div>
 
               <div className="form-group">
-                <label htmlFor="startYear">Start Year (Optional):</label>
+                <label htmlFor="startYear">Start Year :</label>
                 <input type="text" className="form-control" id="startYear" placeholder="2010" value={props.startYear} onChange={props.handleStartYear} />
               </div>
 
               <div className="form-group">
-                <label htmlFor="endYear">End Year (Optional):</label>
+                <label htmlFor="endYear">End Year :</label>
                 <input type="text" className="form-control" id="endYear" placeholder="2017" value={props.endYear} onChange={props.handleEndYear} />
               </div>
 
               <button onClick={props.handleFormSubmit} type="submit" className="btn btn-default" id="run-search"><i className="fa fa-search" aria-hidden="true" /> Search</button>
-              <button onClick={props.clearSearch} type="button" className="btn btn-danger" id="clear-all" style={styles.marginLeft}><i className="fa fa-trash" aria-hidden="true" /> Clear Results</button>
+              <button onClick={props.clearSearch} type="button" className="btn btn-danger" id="clear-all" ><i className="fa fa-trash" aria-hidden="true" /> Clear Results</button>
 
             </form>
           </div>
@@ -47,10 +47,10 @@ const Search = props =>
       </div>
     </div>;
 
-const styles = {
-    marginLeft: {
-        marginLeft: 5
-    }
-}    
+// const styles = {
+//     marginLeft: {
+//         marginLeft: 5
+//     }
+// }  style={styles.marginLeft}  
 
 export default Search;

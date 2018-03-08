@@ -13,17 +13,34 @@ app.use(express.static("client/public"));
 // Add routes, both API and view
 app.use(routes);
 
-// Set up promises with mongoose
-mongoose.Promise = global.Promise;
-// Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/nytreact",
-  {
-    useMongoClient: true
-  }
-);
+
+if(process.env.NODE_ENV == 'production'){
+  
+  mongoose.connect('mongodb://heroku_968j4pks:xEJjvRNBBUFUOgioXXbI00w_Gc51lEGL@ds143738.mlab.com:43738/heroku_968j4pks');
+}
+else{
+  mongoose.connect('mongodb://localhost/nytreact');
+}
+var db = mongoose.connection;
+
+// Show any Mongoose errors
+db.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
+});
+
+// Once logged in to the db through mongoose, log a success message
+db.once('open', function() {
+  console.log('Mongoose connection successful.');
+});
+
+// mongoose.Promise = Promise;
+// mongoose.connect("mongodb://localhost/nytreact", {
+//   useMongoClient: true
+// });
+
+
 // MongoDB Configuration configuration (Change this URL to your own DB)
-// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds143738.mlab.com:43738/heroku_968j4pks');
+// mongoose.connect('mongodb://heroku_968j4pks:xEJjvRNBBUFUOgioXXbI00w_Gc51lEGL@ds143738.mlab.com:43738/heroku_968j4pks');
 // var db = mongoose.connection;
 
 // db.on('error', function (err) {
