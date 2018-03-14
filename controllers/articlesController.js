@@ -1,40 +1,42 @@
-var Articles = require("../models/article");
+const db = require("../models");
 
+// Defining methods for the articleController
 module.exports = {
-    // This method handles retrieving all saved Articles from the db
-    find: function(req, res) {
-        console.log("Retrieving all saved articles.");
-        Articles.find({}, function(err, docs) {
-            if (err) {
-                return res.send(err);
-            }
-            res.json(docs);
-        });
-    },
-    // This method handles creating new Articles
-    save: function(req, res) {
-        console.log("Saving a new article.");
-        var newArticle = new Articles({
-            title: req.body.title,
-            date: req.body.date,
-            url: req.body.url
-        });
-        newArticle.save(function(err) {
-            if (err) {
-                return res.send(err);
-            }
-            console.log("Save successful.");
-            res.json(newArticle);
-        });
-    },
-    // This method handles deleting Articles
-    destroy: function (req, res) {
-        console.log(`Removing article with id ${req.query.id} from database.`);
-        Articles.findByIdAndRemove(req.query.id, function (err) {
-            if (err) {
-                return res.send(err);
-            }
-            res.sendStatus(204);
-        });
-    }
+  findAll: function(req, res) {
+    db.Article
+      .find(req.query)
+      .sort({ date: -1 })
+      .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.status(422).json(err));
+  },
+  findById: function(req, res) {
+    db.Article
+      .findById(req.params.id)
+      .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.status(422).json(err));
+  },
+  create: function(req, res) {
+    const article = {
+      _id: req.body._id,
+      title: req.body.headline.main,
+      url: req.body.web_url
+    };
+    db.Article
+      .create(article)
+      .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.status(422).json(err));
+  },
+  update: function(req, res) {
+    db.Article
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.status(422).json(err));
+  },
+  remove: function(req, res) {
+    db.Article
+      .findById({ _id: req.params.id })
+      .then(dbArticle => dbArticle.remove())
+      .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.status(422).json(err));
+  }
 };
