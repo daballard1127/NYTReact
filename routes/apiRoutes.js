@@ -5,10 +5,10 @@ var articlesController = require("../controllers/articlesController");
 var router = new express.Router();
 
 // Get all articles (or optionally a specific article with an id)
-router.get("/saved", articlesController.find);
+router.get("/", articlesController.find);
 // Create a new article using data passed in req.body
-router.post("/saved", articlesController.save);
+router.post("/", articlesController.save);
 // Delete a specific article using the id in req.params.id
-router.delete("/saved", articlesController.destroy);
+router.delete("/", articlesController.destroy);
 
 module.exports = router;

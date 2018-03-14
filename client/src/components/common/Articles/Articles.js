@@ -22,7 +22,8 @@ class Articles extends Component {
 		};
 
 		this.clearSearch = this.clearSearch.bind(this);
-		this.searchNYT = this.searchNYT.bind(this);
+		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount = () => {
@@ -57,19 +58,17 @@ class Articles extends Component {
 	}
 
 
-	  handleSearchTerm = (event) => {
-	    this.setState({ searchTerm: event.target.value });
-	  }
-	  handleLimit = (event) => {
-	    this.setState({ limit: event.target.value });
-	  }
+	  
+		handleChange = (event)=>{
+			let name = event.target.name;
+			let value = event.target.value;
+			this.setState({
+				[name]: value
 
-	  handleStartYear = (event) => {
-	    this.setState({ startYear: event.target.value });
-	  }
-	  handleEndYear = (event) => {
-	    this.setState({ endYear: event.target.value });
-	  }
+			})
+
+		}
+		
 
 	  clearSearch() {
 	    var newState = {
@@ -106,16 +105,13 @@ class Articles extends Component {
 			      <h1 className="text-center"><strong><i className="fa fa-newspaper-o" aria-hidden="true" /> New York Times Search</strong></h1>
 			    </div>
 			    <Search 
-				    searchTerm = {this.state.searchTerm}
-				    limit = "5"
-				    startYear = {this.state.startYear}
-		      		endYear = {this.state.endYear}
-		      		handleSearchTerm = {this.handleSearchTerm}
-				    handleLimit = {this.handleLimit}
-				    handleStartYear = {this.handleStartYear}
-				    handleEndYear = {this.handleEndYear}
-				    handleFormSubmit={this.handleFormSubmit}
-				    clearSearch={this.clearSearch} />
+				    	searchTerm = {this.state.searchTerm}
+				    	limit = "5"
+				    	startYear = {this.state.startYear}
+							endYear = {this.state.endYear}
+							handleChange  = {this.handleChange}
+				    	handleFormSubmit={this.handleFormSubmit}
+				    	clearSearch={this.clearSearch} />
 			    <Route render={()=><Results 
 			    	passedResults={this.state.searchResults}
 			    	saveArticle={this.saveArticle} />} />

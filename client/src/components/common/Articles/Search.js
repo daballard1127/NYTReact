@@ -15,12 +15,12 @@ const Search = props =>
             <form>
               <div className="form-group">
                 <label htmlFor="search">Search Term:</label>
-                <input type="text" className="form-control" id="search-term" placeholder="Enter here to search for articles." value={props.searchTerm} onChange={props.handleSearchTerm} />
+                <input type="text" className="form-control" id="search-term" placeholder="Enter here to search for articles." name="searchTerm" value={props.searchTerm} onChange={props.handleChange} />
               </div>
 
               <div className="form-group">
                 <label htmlFor="pwd">Number of Records to Retrieve:</label>
-                <select className="form-control" id="num-records-select" name="retrieveNumber" value={props.limit} onChange={props.handleLimit}>
+                <select className="form-control" id="num-records-select" name="retrieveNumber" value={props.limit} onChange={props.handleChange}>
               <option value="1">1</option>
 
               <option value="5">5</option>
@@ -30,12 +30,12 @@ const Search = props =>
 
               <div className="form-group">
                 <label htmlFor="startYear">Start Year :</label>
-                <input type="text" className="form-control" id="startYear" placeholder="2010" value={props.startYear} onChange={props.handleStartYear} />
+                <input type="text" className="form-control" id="startYear" placeholder="2010" name='startYear' onChange={props.handleChange} />
               </div>
 
               <div className="form-group">
                 <label htmlFor="endYear">End Year :</label>
-                <input type="text" className="form-control" id="endYear" placeholder="2017" value={props.endYear} onChange={props.handleEndYear} />
+                <input type="text" className="form-control" id="endYear" placeholder="2017" name ="endYear" onChange={props.handleChange} />
               </div>
 
               <button onClick={props.handleFormSubmit} type="submit" className="btn btn-default" id="run-search"><i className="fa fa-search" aria-hidden="true" /> Search</button>
